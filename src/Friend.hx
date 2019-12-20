@@ -1,3 +1,4 @@
+import pixi.core.display.Container;
 import js.Browser;
 import zero.utilities.Timer;
 import zero.utilities.Vec2;
@@ -18,6 +19,8 @@ class Friend extends Graphics {
 	var vectors:Array<Vec2> = [];
 	var bg:Graphics = new Graphics();
 	var lines:Graphics = new Graphics();
+	var shadow:Graphics = new Graphics();
+	var body:Container = new Container();
 	var size:Vec2 = [];
 	var velocity:Vec2 = [0, 0];
 	public function new() {
@@ -25,8 +28,9 @@ class Friend extends Graphics {
 		i = this;
 		colors.push(colors.shift());
 		this.color = colors.last();
-		this.add(bg);
-		this.add(lines);
+		this.add(body);
+		body.add(bg);
+		body.add(lines);
 		Game.i.friends.add(this);
 		update.listen('update');
 	}
@@ -67,9 +71,7 @@ class Friend extends Graphics {
 			.line(color, v1.x, v1.y, v2.x, v2.y, radius * 2);
 	}
 	function draw_shadow() {		
-		var shadow_vectors = [for (v in vectors) v.copy() + [16, 32]];
-		bg.fill_poly(Color.get(0, 0, 0, 0.25), shadow_vectors);
-		for (v in shadow_vectors) v.put();
+		shadow.fill_poly(Color.get(0, 0, 0, 0.25), vectors);
 	}
 	function draw_bg() {
 		bg.fill_poly(Color.WHITE, vectors);
