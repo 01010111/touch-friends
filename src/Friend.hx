@@ -39,7 +39,7 @@ class Friend extends Graphics {
 		if (y > App.i.height) velocity.y = -velocity.y.abs();
 	}
 	public function draw(e:InteractionEvent) {
-		Browser.window.navigator.vibrate(10);
+		Browser.window.navigator.vibrate(1);
 		var v1:Vec2 = [e.data.global.x, e.data.global.y];
 		var v2:Vec2 = vectors.last();
 		v2 != null ? draw_line(v1, v2) : draw_circle(v1);

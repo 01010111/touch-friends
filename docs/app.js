@@ -326,7 +326,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		}
 	}
 	,draw: function(e) {
-		window.navigator.vibrate(10);
+		window.navigator.vibrate(1);
 		var v1 = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([e.data.global.x,e.data.global.y]);
 		var a = this.vectors;
 		var v2 = a[a.length - 1];
