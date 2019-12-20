@@ -11,13 +11,6 @@ zero_utilities__$Vec4_Vec4_$Impl_$.__name__ = true;
 zero_utilities__$Vec4_Vec4_$Impl_$.from_array_float = function(input) {
 	return zero_utilities__$Vec4_Vec4_$Impl_$._new(input[0],input[1],input[2],input[3]);
 };
-zero_utilities__$Vec4_Vec4_$Impl_$.arr_set = function(this1,n,v) {
-	if(n < 0 || n > 3) {
-		return;
-	} else {
-		this1[n] = v;
-	}
-};
 zero_utilities__$Vec4_Vec4_$Impl_$._new = function(x,y,z,w) {
 	if(w == null) {
 		w = 0;
@@ -98,53 +91,6 @@ haxe_ds_StringMap.prototype = {
 };
 var zero_utilities__$Color_Color_$Impl_$ = {};
 zero_utilities__$Color_Color_$Impl_$.__name__ = true;
-zero_utilities__$Color_Color_$Impl_$.zero = function(n) {
-	if(Math.abs(n) <= zero_utilities__$Color_Color_$Impl_$.epsilon) {
-		return 0;
-	} else {
-		return n;
-	}
-};
-zero_utilities__$Color_Color_$Impl_$.get = function(red,green,blue,alpha) {
-	if(alpha == null) {
-		alpha = 1;
-	}
-	if(blue == null) {
-		blue = 0;
-	}
-	if(green == null) {
-		green = 0;
-	}
-	if(red == null) {
-		red = 0;
-	}
-	if(zero_utilities__$Color_Color_$Impl_$.pool.length > 0) {
-		var this1 = zero_utilities__$Color_Color_$Impl_$.pool.shift();
-		var x = red;
-		var y = green;
-		var z = blue;
-		var w = alpha;
-		if(w == null) {
-			w = 0;
-		}
-		if(z == null) {
-			z = 0;
-		}
-		if(y == null) {
-			y = 0;
-		}
-		if(x == null) {
-			x = 0;
-		}
-		zero_utilities__$Vec4_Vec4_$Impl_$.arr_set(this1,0,zero_utilities__$Color_Color_$Impl_$.zero(x));
-		zero_utilities__$Vec4_Vec4_$Impl_$.arr_set(this1,1,zero_utilities__$Color_Color_$Impl_$.zero(y));
-		zero_utilities__$Vec4_Vec4_$Impl_$.arr_set(this1,2,zero_utilities__$Color_Color_$Impl_$.zero(z));
-		zero_utilities__$Vec4_Vec4_$Impl_$.arr_set(this1,3,zero_utilities__$Color_Color_$Impl_$.zero(w));
-		return this1;
-	} else {
-		return zero_utilities__$Color_Color_$Impl_$._new(red,green,blue,alpha);
-	}
-};
 zero_utilities__$Color_Color_$Impl_$.from_array_float = function(input) {
 	return zero_utilities__$Color_Color_$Impl_$._new(input[0],input[1],input[2],input[3]);
 };
@@ -290,36 +236,131 @@ DrawArea.prototype = $extend(PIXI.Graphics.prototype,{
 		Friend.i.finish(e);
 	}
 });
-Math.__name__ = true;
+var zero_utilities__$Vec2_Vec2_$Impl_$ = {};
+zero_utilities__$Vec2_Vec2_$Impl_$.__name__ = true;
+zero_utilities__$Vec2_Vec2_$Impl_$.zero = function(n) {
+	if(Math.abs(n) <= zero_utilities__$Vec2_Vec2_$Impl_$.epsilon) {
+		return 0;
+	} else {
+		return n;
+	}
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float = function(input) {
+	return zero_utilities__$Vec2_Vec2_$Impl_$._new(input[0],input[1]);
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int = function(input) {
+	return zero_utilities__$Vec2_Vec2_$Impl_$._new(input[0],input[1]);
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.get = function(x,y) {
+	if(y == null) {
+		y = 0;
+	}
+	if(x == null) {
+		x = 0;
+	}
+	if(zero_utilities__$Vec2_Vec2_$Impl_$.pool.length > 0) {
+		var this1 = zero_utilities__$Vec2_Vec2_$Impl_$.pool.shift();
+		var x1 = x;
+		var y1 = y;
+		if(y1 == null) {
+			y1 = 0;
+		}
+		if(x1 == null) {
+			x1 = 0;
+		}
+		this1[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x1);
+		this1[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y1);
+		return zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
+	} else {
+		return zero_utilities__$Vec2_Vec2_$Impl_$._new(x,y);
+	}
+};
+zero_utilities__$Vec2_Vec2_$Impl_$._new = function(x,y) {
+	if(y == null) {
+		y = 0;
+	}
+	if(x == null) {
+		x = 0;
+	}
+	var this1 = [x,y];
+	return this1;
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.get_x = function(this1) {
+	return this1[0];
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.set_x = function(this1,v) {
+	return this1[0] = v;
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.get_y = function(this1) {
+	return this1[1];
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.set_y = function(this1,v) {
+	return this1[1] = v;
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.set_radians = function(this1,v) {
+	var x = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.cos(v);
+	var y = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.sin(v);
+	if(y == null) {
+		y = 0;
+	}
+	if(x == null) {
+		x = 0;
+	}
+	this1[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x);
+	this1[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y);
+	zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
+	return v;
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.add = function(v1,v2) {
+	return zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2));
+};
+zero_utilities__$Vec2_Vec2_$Impl_$.divide_f = function(v,n) {
+	return zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v) / n,zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v) / n);
+};
 var Friend = function() {
+	this.particles = new Particles();
+	this.released = false;
 	this.max_velocity = 20;
 	this.velocity = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([0,0]);
 	this.size = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([]);
+	this.body = new PIXI.Container();
+	this.shadow = new PIXI.Graphics();
 	this.lines = new PIXI.Graphics();
 	this.bg = new PIXI.Graphics();
 	this.vectors = [];
-	PIXI.Graphics.call(this);
+	PIXI.Container.call(this);
 	Friend.i = this;
 	Friend.colors.push(Friend.colors.shift());
 	var a = Friend.colors;
 	this.color = a[a.length - 1];
-	ContainerTools.add(this,this.bg);
-	ContainerTools.add(this,this.lines);
+	this.shadow.scale.set(0);
+	ContainerTools.add(Game.i.shadows,this.shadow);
+	ContainerTools.add(this,this.particles);
+	ContainerTools.add(this,this.body);
+	ContainerTools.add(this.body,this.bg);
+	ContainerTools.add(this.body,this.lines);
 	ContainerTools.add(Game.i.friends,this);
 	zero_utilities_EventBus.listen($bind(this,this.update),"update");
 };
 Friend.__name__ = true;
-Friend.__super__ = PIXI.Graphics;
-Friend.prototype = $extend(PIXI.Graphics.prototype,{
+Friend.__super__ = PIXI.Container;
+Friend.prototype = $extend(PIXI.Container.prototype,{
 	update: function(dt) {
-		this.x += zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity) * dt;
-		this.y += zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity) * dt;
-		var this1 = this.velocity;
-		if(Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) > 0) {
+		this.update_positions(dt);
+		this.update_velocity(dt);
+		this.update_shadow(dt);
+		this.bounds(dt);
+	}
+	,update_positions: function(dt) {
+		this.body.x += zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity) * dt;
+		this.body.y += zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity) * dt;
+	}
+	,update_velocity: function(dt) {
+		if(this.released) {
 			var _g = this.velocity;
 			var v = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
-			var this11 = this.velocity;
-			var v1 = v + (this.max_velocity - Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this11) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this11) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this11) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this11))) * 0.01;
+			var this1 = this.velocity;
+			var v1 = v + (this.max_velocity - Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1))) * 0.01;
 			var x = zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) / Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
 			var y = zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) / Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
 			if(y == null) {
@@ -343,28 +384,36 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			_g[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y1);
 			zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(_g);
 		}
-		this.bounds();
 	}
-	,bounds: function() {
+	,update_shadow: function(dt) {
+		this.shadow.position.set(this.body.x + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(Friend.shadow_offset),this.body.y + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(Friend.shadow_offset));
+		this.shadow.rotation = this.body.rotation;
+		if(!this.released) {
+			return;
+		}
+		this.shadow.scale.x += (this.body.scale.x - this.shadow.scale.x) * 0.1;
+		this.shadow.scale.y += (this.body.scale.y - this.shadow.scale.y) * 0.1;
+	}
+	,bounds: function(dt) {
 		var this1 = this.velocity;
 		var v = zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1));
-		if(this.x < 0) {
+		if(this.body.x < 0) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_x(this.velocity,Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity)));
 		}
-		if(this.x > App.i.width) {
+		if(this.body.x > App.i.width) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_x(this.velocity,-Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity)));
 		}
-		if(this.y < 0) {
+		if(this.body.y < 0) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_y(this.velocity,Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity)));
 		}
-		if(this.y > App.i.height) {
+		if(this.body.y > App.i.height) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_y(this.velocity,-Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity)));
 		}
 		var v1 = this.velocity;
 		if(!(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v) == zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1) && zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v) == zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1))) {
 			Game.i.vibrate(5);
-			this.scale.set(0.95);
-			TweenMax.to(this.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
+			this.body.scale.set(0.95);
+			TweenMax.to(this.body.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
 		}
 		zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v));
 		v = null;
@@ -382,10 +431,10 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		this.vectors.push(v1);
 	}
 	,finish: function(e) {
+		this.released = true;
 		this.vectors.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([e.data.global.x,e.data.global.y]));
 		var a = this.vectors;
 		this.draw_line(a[a.length - 1],this.vectors[0]);
-		this.draw_shadow();
 		this.draw_bg();
 		this.set_center();
 		this.set_size();
@@ -396,31 +445,15 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,draw_circle: function(v) {
 		GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v),Friend.radius);
+		GraphicsTools.fill_circle(this.shadow,zero_utilities__$Color_Color_$Impl_$.BLACK,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v),Friend.radius);
 	}
 	,draw_line: function(v1,v2) {
 		GraphicsTools.line(GraphicsTools.fill_circle(GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius * 2);
-	}
-	,draw_shadow: function() {
-		var _g = [];
-		var _g1 = 0;
-		var _g2 = this.vectors;
-		while(_g1 < _g2.length) {
-			var v = _g2[_g1];
-			++_g1;
-			_g.push(zero_utilities__$Vec2_Vec2_$Impl_$.add(zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v)),zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([16,32])));
-		}
-		var shadow_vectors = _g;
-		GraphicsTools.fill_poly(this.bg,zero_utilities__$Color_Color_$Impl_$.get(0,0,0,0.25),shadow_vectors);
-		var _g3 = 0;
-		while(_g3 < shadow_vectors.length) {
-			var v1 = shadow_vectors[_g3];
-			++_g3;
-			zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v1));
-			v1 = null;
-		}
+		GraphicsTools.line(GraphicsTools.fill_circle(GraphicsTools.fill_circle(this.shadow,zero_utilities__$Color_Color_$Impl_$.BLACK,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),Friend.radius),zero_utilities__$Color_Color_$Impl_$.BLACK,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius),zero_utilities__$Color_Color_$Impl_$.BLACK,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius * 2);
 	}
 	,draw_bg: function() {
 		GraphicsTools.fill_poly(this.bg,zero_utilities__$Color_Color_$Impl_$.WHITE,this.vectors);
+		GraphicsTools.fill_poly(this.shadow,zero_utilities__$Color_Color_$Impl_$.BLACK,this.vectors);
 	}
 	,set_center: function() {
 		var mid = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([0,0]);
@@ -432,8 +465,9 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			mid = zero_utilities__$Vec2_Vec2_$Impl_$.add(mid,vector);
 		}
 		mid = zero_utilities__$Vec2_Vec2_$Impl_$.divide_f(mid,this.vectors.length);
-		this.position.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(mid),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(mid));
-		this.pivot.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(mid),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(mid));
+		this.body.position.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(mid),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(mid));
+		this.body.pivot.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(mid),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(mid));
+		this.shadow.pivot.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(mid),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(mid));
 	}
 	,set_size: function() {
 		var top = -9999999;
@@ -472,8 +506,8 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		this.vectors = [];
 	}
 	,add_eyes: function() {
-		var eye1 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.x - zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.y]));
-		var eye2 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.x + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.y]));
+		var eye1 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.body.x - zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.body.y]));
+		var eye2 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.body.x + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.body.y]));
 		var min = 4;
 		var max = null;
 		if(min == null) {
@@ -510,7 +544,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			Game.i.vibrate(10);
 			return;
 		});
-		ContainerTools.add(this,eye);
+		ContainerTools.add(this.body,eye);
 		zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(pos));
 		pos = null;
 		return eye;
@@ -524,15 +558,15 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			min = 0;
 		}
 		this.velocity = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([min + Math.random() * ((max == null ? 100 : max) - min),0]);
-		var def_max = Friend.PI2;
+		var def_max = Util.PI2;
 		var max1 = null;
 		zero_utilities__$Vec2_Vec2_$Impl_$.set_radians(this.velocity,Math.random() * (max1 == null ? def_max : max1));
-		TweenMax.to(this.scale,0.05,{ x : 1.2, y : 1.2, ease : Quad.easeOut, onComplete : function() {
-			return TweenMax.to(_gthis.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
+		TweenMax.to(this.body.scale,0.05,{ x : 1.2, y : 1.2, ease : Quad.easeOut, onComplete : function() {
+			return TweenMax.to(_gthis.body.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
 		}});
 		var max2 = null;
 		zero_utilities_Timer.get(Math.random() * (max2 == null ? 2 : max2),function() {
-			var def_max1 = Friend.PI2;
+			var def_max1 = Util.PI2;
 			var max3 = null;
 			var tmp = Math.random();
 			_gthis.squid_to(tmp * (max3 == null ? def_max1 : max3));
@@ -541,22 +575,22 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,squid_to: function(angle) {
 		var _gthis = this;
-		angle %= Friend.PI2;
-		var diff = angle - this.rotation;
+		angle %= Util.PI2;
+		var diff = angle - this.body.rotation;
 		if(Math.abs(diff) > Math.PI) {
-			this.rotation += Friend.PI2 * (diff > 0 ? 1 : diff < 0 ? -1 : 0);
+			this.body.rotation += Util.PI2 * (diff > 0 ? 1 : diff < 0 ? -1 : 0);
 		}
-		TweenMax.to(this,1,{ rotation : angle, ease : Sine.easeInOut});
-		TweenMax.to(this.scale,0.2,{ x : 1.25, y : 0.75, delay : 1, ease : Sine.easeOut});
+		TweenMax.to(this.body,1,{ rotation : angle, ease : Sine.easeInOut});
+		TweenMax.to(this.body.scale,0.2,{ x : 1.25, y : 0.75, delay : 1, ease : Sine.easeOut});
 		zero_utilities_Timer.get(1.2,function() {
-			TweenMax.to(_gthis.scale,1,{ x : 1, y : 1, ease : Elastic.easeOut});
+			TweenMax.to(_gthis.body.scale,1,{ x : 1, y : 1, ease : Elastic.easeOut});
 			var min = 200;
 			var max = null;
 			if(min == null) {
 				min = 0;
 			}
 			var v = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([min + Math.random() * ((max == null ? 400 : max) - min),0]);
-			zero_utilities__$Vec2_Vec2_$Impl_$.set_radians(v,_gthis.rotation - Math.PI / 2);
+			zero_utilities__$Vec2_Vec2_$Impl_$.set_radians(v,_gthis.body.rotation - Math.PI / 2);
 			var this1 = _gthis.velocity;
 			var x = zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v);
 			var y = zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v);
@@ -571,13 +605,14 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
 			zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v));
 			v = null;
+			_gthis.particles.spawn(_gthis.body.x,_gthis.body.y,_gthis.velocity,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_gthis.size) / 2);
 			var min1 = 2;
 			var max1 = null;
 			if(min1 == null) {
 				min1 = 0;
 			}
 			return zero_utilities_Timer.get(min1 + Math.random() * ((max1 == null ? 8 : max1) - min1),function() {
-				var def_max = Friend.PI2;
+				var def_max = Util.PI2;
 				var max2 = null;
 				var tmp = Math.random();
 				_gthis.squid_to(tmp * (max2 == null ? def_max : max2));
@@ -587,6 +622,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 });
 var Game = function() {
+	this.shadows = new PIXI.Container();
 	this.friends = new PIXI.Container();
 	App.call(this);
 };
@@ -603,6 +639,16 @@ Game.__super__ = App;
 Game.prototype = $extend(App.prototype,{
 	create: function() {
 		Game.i = this;
+		var screen = new PIXI.Graphics();
+		GraphicsTools.fill_rect(screen,zero_utilities__$Color_Color_$Impl_$.PICO_8_WHITE,0,0,1,1);
+		screen.scale.set(App.i.width,App.i.height);
+		zero_utilities_EventBus.listen(function(_) {
+			screen.scale.set(App.i.width,App.i.height);
+			return;
+		},"resize");
+		screen.alpha = 0.75;
+		ContainerTools.add(this.world,this.shadows);
+		ContainerTools.add(this.world,screen);
 		ContainerTools.add(this.world,this.friends);
 		new Friend();
 		ContainerTools.add(this.world,new DrawArea());
@@ -627,6 +673,15 @@ GraphicsTools.__name__ = true;
 GraphicsTools.fill_circle = function(graphic,color,x,y,radius) {
 	graphic.beginFill((Math.round(zero_utilities__$Color_Color_$Impl_$.get_red(color) * 255) & 255) << 16 | (Math.round(zero_utilities__$Color_Color_$Impl_$.get_green(color) * 255) & 255) << 8 | Math.round(zero_utilities__$Color_Color_$Impl_$.get_blue(color) * 255) & 255,zero_utilities__$Color_Color_$Impl_$.get_alpha(color));
 	graphic.drawCircle(x,y,radius);
+	graphic.endFill();
+	return graphic;
+};
+GraphicsTools.fill_rect = function(graphic,color,x,y,width,height,radius) {
+	if(radius == null) {
+		radius = 0;
+	}
+	graphic.beginFill((Math.round(zero_utilities__$Color_Color_$Impl_$.get_red(color) * 255) & 255) << 16 | (Math.round(zero_utilities__$Color_Color_$Impl_$.get_green(color) * 255) & 255) << 8 | Math.round(zero_utilities__$Color_Color_$Impl_$.get_blue(color) * 255) & 255,zero_utilities__$Color_Color_$Impl_$.get_alpha(color));
+	graphic.drawRoundedRect(x,y,width,height,radius);
 	graphic.endFill();
 	return graphic;
 };
@@ -686,6 +741,51 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
+Math.__name__ = true;
+var Particles = function() {
+	this.particles = [];
+	PIXI.Container.call(this);
+};
+Particles.__name__ = true;
+Particles.__super__ = PIXI.Container;
+Particles.prototype = $extend(PIXI.Container.prototype,{
+	spawn: function(x,y,v,s) {
+		this.get_available().spawn(x,y,v,s / 100);
+	}
+	,get_available: function() {
+		var _g = 0;
+		var _g1 = this.particles;
+		while(_g < _g1.length) {
+			var particle = _g1[_g];
+			++_g;
+			if(particle.alpha < 0.001) {
+				return particle;
+			}
+		}
+		return this.make_particle();
+	}
+	,make_particle: function() {
+		var particle = new Particle();
+		this.particles.push(particle);
+		ContainerTools.add(this,particle);
+		return particle;
+	}
+});
+var Particle = function() {
+	PIXI.Graphics.call(this);
+	GraphicsTools.fill_circle(this,zero_utilities__$Color_Color_$Impl_$.WHITE,0,0,50);
+	this.alpha = 0;
+};
+Particle.__name__ = true;
+Particle.__super__ = PIXI.Graphics;
+Particle.prototype = $extend(PIXI.Graphics.prototype,{
+	spawn: function(x,y,v,s) {
+		this.scale.set(Math.min(s,1));
+		var tmp = x - zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v) * this.scale.x;
+		var tmp1 = y - zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v) * this.scale.x;
+		TweenMax.fromTo(this,1,{ x : x, y : y, alpha : 2},{ x : tmp, y : tmp1, alpha : 0, ease : Expo.easeOut});
+	}
+});
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
@@ -703,6 +803,8 @@ UpdateManager.get_dt = function(time) {
 	UpdateManager.last = time;
 	return out;
 };
+var Util = function() { };
+Util.__name__ = true;
 var haxe_ds_IntMap = function() {
 	this.h = { };
 };
@@ -1000,87 +1102,6 @@ zero_utilities_Timer.prototype = {
 		this.cancel();
 	}
 };
-var zero_utilities__$Vec2_Vec2_$Impl_$ = {};
-zero_utilities__$Vec2_Vec2_$Impl_$.__name__ = true;
-zero_utilities__$Vec2_Vec2_$Impl_$.zero = function(n) {
-	if(Math.abs(n) <= zero_utilities__$Vec2_Vec2_$Impl_$.epsilon) {
-		return 0;
-	} else {
-		return n;
-	}
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float = function(input) {
-	return zero_utilities__$Vec2_Vec2_$Impl_$._new(input[0],input[1]);
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int = function(input) {
-	return zero_utilities__$Vec2_Vec2_$Impl_$._new(input[0],input[1]);
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.get = function(x,y) {
-	if(y == null) {
-		y = 0;
-	}
-	if(x == null) {
-		x = 0;
-	}
-	if(zero_utilities__$Vec2_Vec2_$Impl_$.pool.length > 0) {
-		var this1 = zero_utilities__$Vec2_Vec2_$Impl_$.pool.shift();
-		var x1 = x;
-		var y1 = y;
-		if(y1 == null) {
-			y1 = 0;
-		}
-		if(x1 == null) {
-			x1 = 0;
-		}
-		this1[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x1);
-		this1[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y1);
-		return zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
-	} else {
-		return zero_utilities__$Vec2_Vec2_$Impl_$._new(x,y);
-	}
-};
-zero_utilities__$Vec2_Vec2_$Impl_$._new = function(x,y) {
-	if(y == null) {
-		y = 0;
-	}
-	if(x == null) {
-		x = 0;
-	}
-	var this1 = [x,y];
-	return this1;
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.get_x = function(this1) {
-	return this1[0];
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.set_x = function(this1,v) {
-	return this1[0] = v;
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.get_y = function(this1) {
-	return this1[1];
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.set_y = function(this1,v) {
-	return this1[1] = v;
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.set_radians = function(this1,v) {
-	var x = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.cos(v);
-	var y = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.sin(v);
-	if(y == null) {
-		y = 0;
-	}
-	if(x == null) {
-		x = 0;
-	}
-	this1[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x);
-	this1[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y);
-	zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
-	return v;
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.add = function(v1,v2) {
-	return zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2));
-};
-zero_utilities__$Vec2_Vec2_$Impl_$.divide_f = function(v,n) {
-	return zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v) / n,zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v) / n);
-};
 var $_;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
 $global.$haxeUID |= 0;
@@ -1099,15 +1120,16 @@ zero_utilities__$Color_Color_$Impl_$.PICO_8_RED = zero_utilities__$Color_Color_$
 zero_utilities__$Color_Color_$Impl_$.PICO_8_ORANGE = zero_utilities__$Color_Color_$Impl_$.from_array_float([1,0.639215686274509753,0,1]);
 zero_utilities__$Color_Color_$Impl_$.PICO_8_GREEN = zero_utilities__$Color_Color_$Impl_$.from_array_float([0,0.894117647058823573,0.211764705882352938,1]);
 zero_utilities__$Color_Color_$Impl_$.PICO_8_BLUE = zero_utilities__$Color_Color_$Impl_$.from_array_float([0.160784313725490208,0.67843137254901964,1,1]);
-zero_utilities__$Color_Color_$Impl_$.epsilon = 1e-8;
-zero_utilities__$Color_Color_$Impl_$.pool = [];
 App.fonts = [];
 App.assets = [];
 App.bg_color = zero_utilities__$Color_Color_$Impl_$.BLACK;
-Friend.PI2 = Math.PI * 2;
+zero_utilities__$Vec2_Vec2_$Impl_$.epsilon = 1e-8;
+zero_utilities__$Vec2_Vec2_$Impl_$.pool = [];
 Friend.radius = 16;
+Friend.shadow_offset = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([24,40]);
 Friend.colors = [zero_utilities__$Color_Color_$Impl_$.PICO_8_RED,zero_utilities__$Color_Color_$Impl_$.PICO_8_BLUE,zero_utilities__$Color_Color_$Impl_$.PICO_8_ORANGE,zero_utilities__$Color_Color_$Impl_$.PICO_8_GREEN];
 UpdateManager.last = 0.0;
+Util.PI2 = Math.PI * 2;
 zero_utilities_ECS.ENTITIES = new haxe_ds_StringMap();
 zero_utilities_ECS.COMPONENTS = new haxe_ds_StringMap();
 zero_utilities_ECS.SYSTEMS = new haxe_ds_ObjectMap();
@@ -1116,7 +1138,5 @@ zero_utilities_SyncedSin.counter = 0.0;
 zero_utilities_Timer.timers = [];
 zero_utilities_Timer.pool = [];
 zero_utilities_Timer.epsilon = 1e-8;
-zero_utilities__$Vec2_Vec2_$Impl_$.epsilon = 1e-8;
-zero_utilities__$Vec2_Vec2_$Impl_$.pool = [];
 Game.main();
 })(typeof window != "undefined" ? window : typeof global != "undefined" ? global : typeof self != "undefined" ? self : this);

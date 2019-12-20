@@ -1,3 +1,5 @@
+import pixi.core.graphics.Graphics;
+import pixi.filters.blur.BlurFilter;
 import js.Browser;
 import zero.utilities.Color;
 import pixi.core.display.Container;
@@ -19,9 +21,17 @@ class Game extends App {
 	}
 
 	public var friends:Container = new Container();
+	public var shadows:Container = new Container();
 
 	override function create() {
 		i = this;
+		var screen = new Graphics();
+		screen.fill_rect(Color.PICO_8_WHITE, 0, 0, 1, 1);
+		screen.scale.set(App.i.width, App.i.height);
+		((?_) -> screen.scale.set(App.i.width, App.i.height)).listen('resize');
+		screen.alpha = 0.75;
+		world.add(shadows);
+		world.add(screen);
 		world.add(friends);
 		new Friend();
 		world.add(new DrawArea());
