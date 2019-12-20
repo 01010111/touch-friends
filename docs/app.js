@@ -439,7 +439,7 @@ Friend.prototype = $extend(PIXI.Container.prototype,{
 		this.set_center();
 		this.set_size();
 		this.clear_vectors();
-		this.add_eyes();
+		this.add_face();
 		this.animate();
 		new Friend();
 	}
@@ -505,7 +505,7 @@ Friend.prototype = $extend(PIXI.Container.prototype,{
 		}
 		this.vectors = [];
 	}
-	,add_eyes: function() {
+	,add_face: function() {
 		var eye1 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.body.x - zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.body.y]));
 		var eye2 = this.make_eye(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([this.body.x + zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.size) / 6,this.body.y]));
 		var min = 4;

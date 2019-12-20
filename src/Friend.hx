@@ -89,7 +89,7 @@ class Friend extends Container {
 		set_center();
 		set_size();
 		clear_vectors();
-		add_eyes();
+		add_face();
 		animate();
 		new Friend();
 	}
@@ -136,7 +136,7 @@ class Friend extends Container {
 		for (v in vectors) v.put();
 		vectors = [];
 	}
-	function add_eyes() {
+	function add_face() {
 		var eye1 = make_eye([body.x - size.x/6, body.y]);
 		var eye2 = make_eye([body.x + size.x/6, body.y]);
 		Timer.get(8.get_random(4), () -> {
