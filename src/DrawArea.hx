@@ -10,7 +10,7 @@ class DrawArea extends Graphics {
 		interactive = true;
 		on('mousedown', (e) -> drawing = true);
 		on('mouseup', (e) -> stop_draw(e));
-		on('mouseout', (e) -> stop_draw(e));
+		//on('mouseout', (e) -> stop_draw(e));
 		on('mousemove', (e) -> draw(e));
 		on('touchstart', (e) -> draw(e, true));
 		on('touchmove', (e) -> draw(e, true));
