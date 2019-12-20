@@ -1,3 +1,4 @@
+import js.Browser;
 import zero.utilities.Timer;
 import zero.utilities.Vec2;
 import zero.utilities.Color;
@@ -119,6 +120,7 @@ class Friend extends Graphics {
 		return eye;
 	}
 	function animate() {
+		Browser.window.navigator.vibrate([100, 100, 200]);
 		velocity = [0, 100.get_random(20)];
 		velocity.angle = 360.get_random();
 		scale.to(0.05, { x: 1.2, y: 1.2, ease: Quad.easeOut, onComplete: () -> {

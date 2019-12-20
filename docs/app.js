@@ -471,6 +471,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,animate: function() {
 		var _gthis = this;
+		window.navigator.vibrate([100,100,200]);
 		var min = 20;
 		var max = null;
 		if(min == null) {
