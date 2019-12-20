@@ -326,6 +326,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		}
 	}
 	,draw: function(e) {
+		window.navigator.vibrate(10);
 		var v1 = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([e.data.global.x,e.data.global.y]);
 		var a = this.vectors;
 		var v2 = a[a.length - 1];
@@ -471,7 +472,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,animate: function() {
 		var _gthis = this;
-		window.navigator.vibrate([100,100,200]);
+		window.navigator.vibrate([50,50,50]);
 		var min = 20;
 		var max = null;
 		if(min == null) {
