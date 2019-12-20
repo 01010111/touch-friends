@@ -290,7 +290,9 @@ DrawArea.prototype = $extend(PIXI.Graphics.prototype,{
 		Friend.i.finish(e);
 	}
 });
+Math.__name__ = true;
 var Friend = function() {
+	this.max_velocity = 20;
 	this.velocity = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([0,0]);
 	this.size = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([]);
 	this.lines = new PIXI.Graphics();
@@ -312,6 +314,40 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	update: function(dt) {
 		this.x += zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity) * dt;
 		this.y += zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity) * dt;
+		var this1 = this.velocity;
+		if(Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) > 0) {
+			var _g = this.velocity;
+			var v = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
+			var this11 = this.velocity;
+			var v1 = v + (this.max_velocity - Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this11) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this11) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this11) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this11))) * 0.01;
+			var x = zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) / Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
+			var y = zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) / Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g));
+			if(y == null) {
+				y = 0;
+			}
+			if(x == null) {
+				x = 0;
+			}
+			_g[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x);
+			_g[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y);
+			zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(_g);
+			var x1 = zero_utilities__$Vec2_Vec2_$Impl_$.get_x(_g) * v1;
+			var y1 = zero_utilities__$Vec2_Vec2_$Impl_$.get_y(_g) * v1;
+			if(y1 == null) {
+				y1 = 0;
+			}
+			if(x1 == null) {
+				x1 = 0;
+			}
+			_g[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x1);
+			_g[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y1);
+			zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(_g);
+		}
+		this.bounds();
+	}
+	,bounds: function() {
+		var this1 = this.velocity;
+		var v = zero_utilities__$Vec2_Vec2_$Impl_$.get(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1));
 		if(this.x < 0) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_x(this.velocity,Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this.velocity)));
 		}
@@ -324,9 +360,17 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		if(this.y > App.i.height) {
 			zero_utilities__$Vec2_Vec2_$Impl_$.set_y(this.velocity,-Math.abs(zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this.velocity)));
 		}
+		var v1 = this.velocity;
+		if(!(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v) == zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1) && zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v) == zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1))) {
+			Game.i.vibrate(5);
+			this.scale.set(0.95);
+			TweenMax.to(this.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
+		}
+		zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v));
+		v = null;
 	}
 	,draw: function(e) {
-		window.navigator.vibrate(1);
+		Game.i.vibrate(1);
 		var v1 = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([e.data.global.x,e.data.global.y]);
 		var a = this.vectors;
 		var v2 = a[a.length - 1];
@@ -463,7 +507,8 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		}
 		TweenMax.to(eye.scale,min1 + Math.random() * ((max1 == null ? 0.5 : max1) - min1),{ x : 1, y : 1, ease : Elastic.easeOut, delay : t});
 		zero_utilities_Timer.get(t,function() {
-			return window.navigator.vibrate(10);
+			Game.i.vibrate(10);
+			return;
 		});
 		ContainerTools.add(this,eye);
 		zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(pos));
@@ -472,32 +517,73 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,animate: function() {
 		var _gthis = this;
-		window.navigator.vibrate(10);
-		var min = 20;
+		Game.i.vibrate(10);
+		var min = 50;
 		var max = null;
 		if(min == null) {
 			min = 0;
 		}
-		this.velocity = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([0,min + Math.random() * ((max == null ? 100 : max) - min)]);
+		this.velocity = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([min + Math.random() * ((max == null ? 100 : max) - min),0]);
+		var def_max = Friend.PI2;
 		var max1 = null;
-		zero_utilities__$Vec2_Vec2_$Impl_$.set_angle(this.velocity,Math.random() * (max1 == null ? 360 : max1));
+		zero_utilities__$Vec2_Vec2_$Impl_$.set_radians(this.velocity,Math.random() * (max1 == null ? def_max : max1));
 		TweenMax.to(this.scale,0.05,{ x : 1.2, y : 1.2, ease : Quad.easeOut, onComplete : function() {
 			return TweenMax.to(_gthis.scale,0.5,{ x : 1, y : 1, ease : Elastic.easeOut});
 		}});
-		var min1 = -0.2;
 		var max2 = null;
-		if(min1 == null) {
-			min1 = 0;
-		}
-		TweenMax.to(this,0.2,{ rotation : min1 + Math.random() * ((max2 == null ? 0.2 : max2) - min1), onComplete : function() {
-			var min2 = 1;
+		zero_utilities_Timer.get(Math.random() * (max2 == null ? 2 : max2),function() {
+			var def_max1 = Friend.PI2;
 			var max3 = null;
-			if(min2 == null) {
-				min2 = 0;
-			}
 			var tmp = Math.random();
-			return TweenMax.to(_gthis,min2 + tmp * ((max3 == null ? 4 : max3) - min2),{ rotation : -_gthis.rotation, ease : Sine.easeInOut, yoyo : true}).repeat(-1);
-		}});
+			_gthis.squid_to(tmp * (max3 == null ? def_max1 : max3));
+			return;
+		});
+	}
+	,squid_to: function(angle) {
+		var _gthis = this;
+		angle %= Friend.PI2;
+		var diff = angle - this.rotation;
+		if(Math.abs(diff) > Math.PI) {
+			this.rotation += Friend.PI2 * (diff > 0 ? 1 : diff < 0 ? -1 : 0);
+		}
+		TweenMax.to(this,1,{ rotation : angle, ease : Sine.easeInOut});
+		TweenMax.to(this.scale,0.2,{ x : 1.25, y : 0.75, delay : 1, ease : Sine.easeOut});
+		zero_utilities_Timer.get(1.2,function() {
+			TweenMax.to(_gthis.scale,1,{ x : 1, y : 1, ease : Elastic.easeOut});
+			var min = 200;
+			var max = null;
+			if(min == null) {
+				min = 0;
+			}
+			var v = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([min + Math.random() * ((max == null ? 400 : max) - min),0]);
+			zero_utilities__$Vec2_Vec2_$Impl_$.set_radians(v,_gthis.rotation - Math.PI / 2);
+			var this1 = _gthis.velocity;
+			var x = zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v);
+			var y = zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v);
+			if(y == null) {
+				y = 0;
+			}
+			if(x == null) {
+				x = 0;
+			}
+			this1[0] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(x);
+			this1[1] = zero_utilities__$Vec2_Vec2_$Impl_$.zero(y);
+			zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(this1);
+			zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v));
+			v = null;
+			var min1 = 2;
+			var max1 = null;
+			if(min1 == null) {
+				min1 = 0;
+			}
+			return zero_utilities_Timer.get(min1 + Math.random() * ((max1 == null ? 8 : max1) - min1),function() {
+				var def_max = Friend.PI2;
+				var max2 = null;
+				var tmp = Math.random();
+				_gthis.squid_to(tmp * (max2 == null ? def_max : max2));
+				return;
+			});
+		});
 	}
 });
 var Game = function() {
@@ -521,7 +607,19 @@ Game.prototype = $extend(App.prototype,{
 		new Friend();
 		ContainerTools.add(this.world,new DrawArea());
 	}
-	,update: function(dt) {
+	,vibrate: function(amt,amts) {
+		if(amt == null && amts == null) {
+			return;
+		}
+		if(window.navigator.vibrate == null) {
+			return;
+		}
+		if(amt != null) {
+			window.navigator.vibrate(amt);
+		}
+		if(amts != null) {
+			window.navigator.vibrate(amts);
+		}
 	}
 });
 var GraphicsTools = function() { };
@@ -588,7 +686,6 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
-Math.__name__ = true;
 var Std = function() { };
 Std.__name__ = true;
 Std.string = function(s) {
@@ -964,8 +1061,7 @@ zero_utilities__$Vec2_Vec2_$Impl_$.get_y = function(this1) {
 zero_utilities__$Vec2_Vec2_$Impl_$.set_y = function(this1,v) {
 	return this1[1] = v;
 };
-zero_utilities__$Vec2_Vec2_$Impl_$.set_angle = function(this1,v) {
-	v *= Math.PI / 180;
+zero_utilities__$Vec2_Vec2_$Impl_$.set_radians = function(this1,v) {
 	var x = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.cos(v);
 	var y = Math.sqrt(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_x(this1) + zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1) * zero_utilities__$Vec2_Vec2_$Impl_$.get_y(this1)) * Math.sin(v);
 	if(y == null) {
@@ -1008,6 +1104,7 @@ zero_utilities__$Color_Color_$Impl_$.pool = [];
 App.fonts = [];
 App.assets = [];
 App.bg_color = zero_utilities__$Color_Color_$Impl_$.BLACK;
+Friend.PI2 = Math.PI * 2;
 Friend.radius = 16;
 Friend.colors = [zero_utilities__$Color_Color_$Impl_$.PICO_8_RED,zero_utilities__$Color_Color_$Impl_$.PICO_8_BLUE,zero_utilities__$Color_Color_$Impl_$.PICO_8_ORANGE,zero_utilities__$Color_Color_$Impl_$.PICO_8_GREEN];
 UpdateManager.last = 0.0;

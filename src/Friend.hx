@@ -7,6 +7,7 @@ import pixi.interaction.InteractionEvent;
 import pixi.core.graphics.Graphics;
 
 class Friend extends Graphics {
+	static var PI2 = Math.PI * 2;
 	public static var i:Friend;
 	public static var radius:Float = 16;
 	public static var colors = [
@@ -23,6 +24,7 @@ class Friend extends Graphics {
 	var body:Container = new Container();
 	var size:Vec2 = [];
 	var velocity:Vec2 = [0, 0];
+	var max_velocity:Float = 20;
 	public function new() {
 		super();
 		i = this;
@@ -37,13 +39,24 @@ class Friend extends Graphics {
 	function update(?dt:Float) {
 		x += velocity.x * dt;
 		y += velocity.y * dt;
+		if (velocity.length > 0) velocity.length += (max_velocity - velocity.length) * 0.01;
+		bounds();
+	}
+	function bounds() {
+		var v = velocity.copy();
 		if (x < 0) velocity.x = velocity.x.abs();
 		if (x > App.i.width) velocity.x = -velocity.x.abs();
 		if (y < 0) velocity.y = velocity.y.abs();
 		if (y > App.i.height) velocity.y = -velocity.y.abs();
+		if (!v.equals(velocity)) {
+			Game.i.vibrate(5);
+			scale.set(0.95);
+			scale.to(0.5, { x: 1, y: 1, ease: Elastic.easeOut });
+		}
+		v.put();
 	}
 	public function draw(e:InteractionEvent) {
-		Browser.window.navigator.vibrate(1);
+		Game.i.vibrate(1);
 		var v1:Vec2 = [e.data.global.x, e.data.global.y];
 		var v2:Vec2 = vectors.last();
 		v2 != null ? draw_line(v1, v2) : draw_circle(v1);
@@ -119,20 +132,33 @@ class Friend extends Graphics {
 		eye.scale.set(0);
 		var t = 0.5.get_random(0.25);
 		eye.scale.to(0.5.get_random(0.3), { x: 1, y: 1, ease: Elastic.easeOut, delay: t });
-		Timer.get(t, () -> Browser.window.navigator.vibrate(10));
+		Timer.get(t, () -> Game.i.vibrate(10));
 		this.add(eye);
 		pos.put();
 		return eye;
 	}
 	function animate() {
-		Browser.window.navigator.vibrate(10);
-		velocity = [0, 100.get_random(20)];
-		velocity.angle = 360.get_random();
+		Game.i.vibrate(10);
+		velocity = [100.get_random(50), 0];
+		velocity.radians = PI2.get_random();
 		scale.to(0.05, { x: 1.2, y: 1.2, ease: Quad.easeOut, onComplete: () -> {
 			scale.to(0.5, { x: 1, y: 1, ease: Elastic.easeOut });
 		}});
-		this.to(0.2, { rotation: 0.2.get_random(-0.2), onComplete: () -> {
-			this.to(4.get_random(1), { rotation: -rotation, ease: Sine.easeInOut, yoyo: true }).repeat(-1);
-		}});
+		Timer.get(2.get_random(), () -> squid_to(PI2.get_random()));
+	}
+	function squid_to(angle:Float) {
+		angle = angle % PI2;
+		var diff = angle - rotation;
+		if (diff.abs() > Math.PI) rotation += PI2 * diff.sign_of();
+		this.to(1, { rotation: angle, ease: Sine.easeInOut });
+		scale.to(0.2, { x: 1.25, y: 0.75, delay: 1, ease: Sine.easeOut });
+		Timer.get(1.2, () -> {
+			scale.to(1, { x: 1, y: 1, ease: Elastic.easeOut });
+			var v:Vec2 = [400.get_random(200), 0];
+			v.radians = rotation - Math.PI/2;
+			velocity.copy_from(v);
+			v.put();
+			Timer.get(8.get_random(2), () -> squid_to(PI2.get_random()));
+		});
 	}
 }
