@@ -253,24 +253,20 @@ var DrawArea = function() {
 		_gthis.stop_draw(e1);
 		return;
 	});
-	this.on("mouseout",function(e2) {
-		_gthis.stop_draw(e2);
+	this.on("mousemove",function(e2) {
+		_gthis.draw(e2);
 		return;
 	});
-	this.on("mousemove",function(e3) {
-		_gthis.draw(e3);
+	this.on("touchstart",function(e3) {
+		_gthis.draw(e3,true);
 		return;
 	});
-	this.on("touchstart",function(e4) {
+	this.on("touchmove",function(e4) {
 		_gthis.draw(e4,true);
 		return;
 	});
-	this.on("touchmove",function(e5) {
-		_gthis.draw(e5,true);
-		return;
-	});
-	this.on("touchend",function(e6) {
-		_gthis.stop_draw(e6);
+	this.on("touchend",function(e5) {
+		_gthis.stop_draw(e5);
 		return;
 	});
 	this.hitArea = new PIXI.Rectangle(0,0,App.i.width,App.i.height);
@@ -344,6 +340,22 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		this.vectors.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float([e.data.global.x,e.data.global.y]));
 		var a = this.vectors;
 		this.draw_line(a[a.length - 1],this.vectors[0]);
+		this.draw_shadow();
+		this.draw_bg();
+		this.set_center();
+		this.set_size();
+		this.clear_vectors();
+		this.add_eyes();
+		this.animate();
+		new Friend();
+	}
+	,draw_circle: function(v) {
+		GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v),Friend.radius);
+	}
+	,draw_line: function(v1,v2) {
+		GraphicsTools.line(GraphicsTools.fill_circle(GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius * 2);
+	}
+	,draw_shadow: function() {
 		var _g = [];
 		var _g1 = 0;
 		var _g2 = this.vectors;
@@ -361,19 +373,9 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 			zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(v1));
 			v1 = null;
 		}
+	}
+	,draw_bg: function() {
 		GraphicsTools.fill_poly(this.bg,zero_utilities__$Color_Color_$Impl_$.WHITE,this.vectors);
-		this.set_center();
-		this.set_size();
-		this.clear_vectors();
-		this.add_eyes();
-		this.animate();
-		new Friend();
-	}
-	,draw_circle: function(v) {
-		GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v),Friend.radius);
-	}
-	,draw_line: function(v1,v2) {
-		GraphicsTools.line(GraphicsTools.fill_circle(GraphicsTools.fill_circle(this.lines,this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius),this.color,zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v1),zero_utilities__$Vec2_Vec2_$Impl_$.get_x(v2),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(v2),Friend.radius * 2);
 	}
 	,set_center: function() {
 		var mid = zero_utilities__$Vec2_Vec2_$Impl_$.from_array_int([0,0]);

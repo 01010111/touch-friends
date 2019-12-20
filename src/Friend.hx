@@ -46,10 +46,8 @@ class Friend extends Graphics {
 	public function finish(e:InteractionEvent) {
 		vectors.push([e.data.global.x, e.data.global.y]);
 		draw_line(vectors.last(), vectors[0]);
-		var shadow_vectors = [for (v in vectors) v.copy() + [16, 32]];
-		bg.fill_poly(Color.get(0, 0, 0, 0.25), shadow_vectors);
-		for (v in shadow_vectors) v.put();
-		bg.fill_poly(Color.WHITE, vectors);
+		draw_shadow();
+		draw_bg();
 		set_center();
 		set_size();
 		clear_vectors();
@@ -65,6 +63,14 @@ class Friend extends Graphics {
 			.fill_circle(color, v1.x, v1.y, radius)
 			.fill_circle(color, v2.x, v2.y, radius)
 			.line(color, v1.x, v1.y, v2.x, v2.y, radius * 2);
+	}
+	function draw_shadow() {		
+		var shadow_vectors = [for (v in vectors) v.copy() + [16, 32]];
+		bg.fill_poly(Color.get(0, 0, 0, 0.25), shadow_vectors);
+		for (v in shadow_vectors) v.put();
+	}
+	function draw_bg() {
+		bg.fill_poly(Color.WHITE, vectors);
 	}
 	function set_center() {
 		var mid:Vec2 = [0, 0];
