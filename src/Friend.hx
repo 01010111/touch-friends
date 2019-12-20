@@ -115,13 +115,15 @@ class Friend extends Graphics {
 			.circle(Color.BLACK, 0, 0, size/6, size/16);
 		eye.position.set(pos.x, pos.y);
 		eye.scale.set(0);
-		eye.scale.to(0.5.get_random(0.3), { x: 1, y: 1, ease: Elastic.easeOut, delay: 0.5.get_random(0.25) });
+		var t = 0.5.get_random(0.25);
+		eye.scale.to(0.5.get_random(0.3), { x: 1, y: 1, ease: Elastic.easeOut, delay: t });
+		Timer.get(t, () -> Browser.window.navigator.vibrate(10));
 		this.add(eye);
 		pos.put();
 		return eye;
 	}
 	function animate() {
-		Browser.window.navigator.vibrate([50, 50, 50]);
+		Browser.window.navigator.vibrate(10);
 		velocity = [0, 100.get_random(20)];
 		velocity.angle = 360.get_random();
 		scale.to(0.05, { x: 1.2, y: 1.2, ease: Quad.easeOut, onComplete: () -> {

@@ -450,21 +450,21 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 		GraphicsTools.circle(GraphicsTools.fill_circle(GraphicsTools.fill_circle(eye,zero_utilities__$Color_Color_$Impl_$.WHITE,0,0,size / 6),zero_utilities__$Color_Color_$Impl_$.BLACK,0,0,size / 12),zero_utilities__$Color_Color_$Impl_$.BLACK,0,0,size / 6,size / 16);
 		eye.position.set(zero_utilities__$Vec2_Vec2_$Impl_$.get_x(pos),zero_utilities__$Vec2_Vec2_$Impl_$.get_y(pos));
 		eye.scale.set(0);
-		var eye1 = eye.scale;
-		var min = 0.3;
+		var min = 0.25;
 		var max = null;
 		if(min == null) {
 			min = 0;
 		}
-		var tmp = Math.random();
-		var tmp1 = Elastic.easeOut;
-		var min1 = 0.25;
+		var t = min + Math.random() * ((max == null ? 0.5 : max) - min);
+		var min1 = 0.3;
 		var max1 = null;
 		if(min1 == null) {
 			min1 = 0;
 		}
-		var tmp2 = Math.random();
-		TweenMax.to(eye1,min + tmp * ((max == null ? 0.5 : max) - min),{ x : 1, y : 1, ease : tmp1, delay : min1 + tmp2 * ((max1 == null ? 0.5 : max1) - min1)});
+		TweenMax.to(eye.scale,min1 + Math.random() * ((max1 == null ? 0.5 : max1) - min1),{ x : 1, y : 1, ease : Elastic.easeOut, delay : t});
+		zero_utilities_Timer.get(t,function() {
+			return window.navigator.vibrate(10);
+		});
 		ContainerTools.add(this,eye);
 		zero_utilities__$Vec2_Vec2_$Impl_$.pool.push(zero_utilities__$Vec2_Vec2_$Impl_$.from_array_float(pos));
 		pos = null;
@@ -472,7 +472,7 @@ Friend.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 	,animate: function() {
 		var _gthis = this;
-		window.navigator.vibrate([50,50,50]);
+		window.navigator.vibrate(10);
 		var min = 20;
 		var max = null;
 		if(min == null) {
