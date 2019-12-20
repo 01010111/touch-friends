@@ -1,3 +1,4 @@
+import js.Browser;
 import zero.utilities.Color;
 import pixi.core.display.Container;
 import App;
@@ -26,7 +27,10 @@ class Game extends App {
 		world.add(new DrawArea());
 	}
 
-	override function update(?dt:Float) {
-		
+	public function vibrate(?amt:Int, ?amts:Array<Int>) {
+		if (amt == null && amts == null) return;
+		if (Browser.window.navigator.vibrate == null) return;
+		if (amt != null) Browser.window.navigator.vibrate(amt);
+		if (amts != null) Browser.window.navigator.vibrate(amts);
 	}
 }
