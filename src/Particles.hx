@@ -27,10 +27,11 @@ class Particle extends Graphics {
 	public function new() {
 		super();
 		this.fill_circle(Color.WHITE, 0, 0, 50);
+		//this.circle(Color.PICO_8_BLUE, 0, 0, 50, 10);
 		alpha = 0;
 	}
 	public function spawn(x:Float, y:Float, v:Vec2, s:Float) {
 		scale.set(s.min(1));
-		this.fromTo(1, { x: x, y: y, alpha: 1 }, { x: x - v.x, y: y - v.y, alpha: 0, ease: Expo.easeOut });
+		this.fromTo(1, { x: x, y: y, alpha: 2 }, { x: x - v.x * scale.x, y: y - v.y * scale.x, alpha: 0, ease: Expo.easeOut });
 	}
 }
