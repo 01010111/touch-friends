@@ -7,7 +7,6 @@ function $extend(from, fields) {
 	return proto;
 }
 var zero_utilities__$Vec4_Vec4_$Impl_$ = {};
-zero_utilities__$Vec4_Vec4_$Impl_$.__name__ = true;
 zero_utilities__$Vec4_Vec4_$Impl_$.from_array_float = function(input) {
 	return zero_utilities__$Vec4_Vec4_$Impl_$._new(input[0],input[1],input[2],input[3]);
 };
@@ -42,7 +41,6 @@ zero_utilities__$Vec4_Vec4_$Impl_$.get_w = function(this1) {
 var haxe_ds_StringMap = function() {
 	this.h = { };
 };
-haxe_ds_StringMap.__name__ = true;
 haxe_ds_StringMap.prototype = {
 	get: function(key) {
 		if(__map_reserved[key] != null) {
@@ -90,7 +88,6 @@ haxe_ds_StringMap.prototype = {
 	}
 };
 var zero_utilities__$Color_Color_$Impl_$ = {};
-zero_utilities__$Color_Color_$Impl_$.__name__ = true;
 zero_utilities__$Color_Color_$Impl_$.from_array_float = function(input) {
 	return zero_utilities__$Color_Color_$Impl_$._new(input[0],input[1],input[2],input[3]);
 };
@@ -159,7 +156,6 @@ var App = function() {
 	this.stage.addChild(this.world);
 	this.create();
 };
-App.__name__ = true;
 App.main = function(start) {
 	var load_assets = function() {
 		var loader = new PIXI.loaders.Loader();
@@ -183,7 +179,6 @@ App.prototype = $extend(PIXI.Application.prototype,{
 	}
 });
 var ContainerTools = function() { };
-ContainerTools.__name__ = true;
 ContainerTools.add = function(object,child) {
 	object.addChild(child);
 };
@@ -220,7 +215,6 @@ var DrawArea = function() {
 		return _gthis.hitArea = new PIXI.Rectangle(0,0,App.i.width,App.i.height);
 	},"resize");
 };
-DrawArea.__name__ = true;
 DrawArea.__super__ = PIXI.Graphics;
 DrawArea.prototype = $extend(PIXI.Graphics.prototype,{
 	draw: function(e,force) {
@@ -237,7 +231,6 @@ DrawArea.prototype = $extend(PIXI.Graphics.prototype,{
 	}
 });
 var zero_utilities__$Vec2_Vec2_$Impl_$ = {};
-zero_utilities__$Vec2_Vec2_$Impl_$.__name__ = true;
 zero_utilities__$Vec2_Vec2_$Impl_$.zero = function(n) {
 	if(Math.abs(n) <= zero_utilities__$Vec2_Vec2_$Impl_$.epsilon) {
 		return 0;
@@ -342,7 +335,6 @@ var Friend = function() {
 	ContainerTools.add(Game.i.friends,this);
 	zero_utilities_EventBus.listen($bind(this,this.update),"update");
 };
-Friend.__name__ = true;
 Friend.__super__ = PIXI.Container;
 Friend.prototype = $extend(PIXI.Container.prototype,{
 	update: function(dt) {
@@ -626,7 +618,6 @@ var Game = function() {
 	this.friends = new PIXI.Container();
 	App.call(this);
 };
-Game.__name__ = true;
 Game.main = function() {
 	App.assets = [];
 	App.fonts = [];
@@ -669,7 +660,6 @@ Game.prototype = $extend(App.prototype,{
 	}
 });
 var GraphicsTools = function() { };
-GraphicsTools.__name__ = true;
 GraphicsTools.fill_circle = function(graphic,color,x,y,radius) {
 	graphic.beginFill((Math.round(zero_utilities__$Color_Color_$Impl_$.get_red(color) * 255) & 255) << 16 | (Math.round(zero_utilities__$Color_Color_$Impl_$.get_green(color) * 255) & 255) << 8 | Math.round(zero_utilities__$Color_Color_$Impl_$.get_blue(color) * 255) & 255,zero_utilities__$Color_Color_$Impl_$.get_alpha(color));
 	graphic.drawCircle(x,y,radius);
@@ -725,7 +715,6 @@ GraphicsTools.line = function(graphic,color,p0x,p0y,p1x,p1y,thickness,alignment)
 	return graphic;
 };
 var HxOverrides = function() { };
-HxOverrides.__name__ = true;
 HxOverrides.remove = function(a,obj) {
 	var i = a.indexOf(obj);
 	if(i == -1) {
@@ -741,12 +730,10 @@ HxOverrides.iter = function(a) {
 		return this.arr[this.cur++];
 	}};
 };
-Math.__name__ = true;
 var Particles = function() {
 	this.particles = [];
 	PIXI.Container.call(this);
 };
-Particles.__name__ = true;
 Particles.__super__ = PIXI.Container;
 Particles.prototype = $extend(PIXI.Container.prototype,{
 	spawn: function(x,y,v,s) {
@@ -776,7 +763,6 @@ var Particle = function() {
 	GraphicsTools.fill_circle(this,zero_utilities__$Color_Color_$Impl_$.WHITE,0,0,50);
 	this.alpha = 0;
 };
-Particle.__name__ = true;
 Particle.__super__ = PIXI.Graphics;
 Particle.prototype = $extend(PIXI.Graphics.prototype,{
 	spawn: function(x,y,v,s) {
@@ -786,13 +772,7 @@ Particle.prototype = $extend(PIXI.Graphics.prototype,{
 		TweenMax.fromTo(this,1,{ x : x, y : y, alpha : 2},{ x : tmp, y : tmp1, alpha : 0, ease : Expo.easeOut});
 	}
 });
-var Std = function() { };
-Std.__name__ = true;
-Std.string = function(s) {
-	return js_Boot.__string_rec(s,"");
-};
 var UpdateManager = function() { };
-UpdateManager.__name__ = true;
 UpdateManager.update = function(time) {
 	var dt = UpdateManager.get_dt(time);
 	zero_utilities_EventBus.dispatch("update",dt);
@@ -804,11 +784,9 @@ UpdateManager.get_dt = function(time) {
 	return out;
 };
 var Util = function() { };
-Util.__name__ = true;
 var haxe_ds_IntMap = function() {
 	this.h = { };
 };
-haxe_ds_IntMap.__name__ = true;
 haxe_ds_IntMap.prototype = {
 	get: function(key) {
 		return this.h[key];
@@ -822,7 +800,6 @@ haxe_ds_IntMap.prototype = {
 var haxe_ds_ObjectMap = function() {
 	this.h = { __keys__ : { }};
 };
-haxe_ds_ObjectMap.__name__ = true;
 haxe_ds_ObjectMap.prototype = {
 	get: function(key) {
 		return this.h[key.__id__];
@@ -841,7 +818,6 @@ var haxe_iterators_MapKeyValueIterator = function(map) {
 	this.map = map;
 	this.keys = map.keys();
 };
-haxe_iterators_MapKeyValueIterator.__name__ = true;
 haxe_iterators_MapKeyValueIterator.prototype = {
 	hasNext: function() {
 		return this.keys.hasNext();
@@ -851,86 +827,7 @@ haxe_iterators_MapKeyValueIterator.prototype = {
 		return { value : this.map.get(key), key : key};
 	}
 };
-var js__$Boot_HaxeError = function(val) {
-	Error.call(this);
-	this.val = val;
-	if(Error.captureStackTrace) {
-		Error.captureStackTrace(this,js__$Boot_HaxeError);
-	}
-};
-js__$Boot_HaxeError.__name__ = true;
-js__$Boot_HaxeError.__super__ = Error;
-js__$Boot_HaxeError.prototype = $extend(Error.prototype,{
-});
-var js_Boot = function() { };
-js_Boot.__name__ = true;
-js_Boot.__string_rec = function(o,s) {
-	if(o == null) {
-		return "null";
-	}
-	if(s.length >= 5) {
-		return "<...>";
-	}
-	var t = typeof(o);
-	if(t == "function" && (o.__name__ || o.__ename__)) {
-		t = "object";
-	}
-	switch(t) {
-	case "function":
-		return "<function>";
-	case "object":
-		if(((o) instanceof Array)) {
-			var str = "[";
-			s += "\t";
-			var _g3 = 0;
-			var _g11 = o.length;
-			while(_g3 < _g11) {
-				var i = _g3++;
-				str += (i > 0 ? "," : "") + js_Boot.__string_rec(o[i],s);
-			}
-			str += "]";
-			return str;
-		}
-		var tostr;
-		try {
-			tostr = o.toString;
-		} catch( e1 ) {
-			var e2 = ((e1) instanceof js__$Boot_HaxeError) ? e1.val : e1;
-			return "???";
-		}
-		if(tostr != null && tostr != Object.toString && typeof(tostr) == "function") {
-			var s2 = o.toString();
-			if(s2 != "[object Object]") {
-				return s2;
-			}
-		}
-		var str1 = "{\n";
-		s += "\t";
-		var hasp = o.hasOwnProperty != null;
-		var k = null;
-		for( k in o ) {
-		if(hasp && !o.hasOwnProperty(k)) {
-			continue;
-		}
-		if(k == "prototype" || k == "__class__" || k == "__super__" || k == "__interfaces__" || k == "__properties__") {
-			continue;
-		}
-		if(str1.length != 2) {
-			str1 += ", \n";
-		}
-		str1 += s + k + " : " + js_Boot.__string_rec(o[k],s);
-		}
-		s = s.substring(1);
-		str1 += "\n" + s + "}";
-		return str1;
-	case "string":
-		return o;
-	default:
-		return String(o);
-	}
-};
 var zero_extensions_ArrayExt = function() { };
-zero_extensions_ArrayExt.__name__ = true;
 zero_extensions_ArrayExt.remove_duplicates = function(arr) {
 	var unique = [];
 	var _g = 0;
@@ -945,7 +842,6 @@ zero_extensions_ArrayExt.remove_duplicates = function(arr) {
 	return arr;
 };
 var zero_utilities_ECS = function() { };
-zero_utilities_ECS.__name__ = true;
 zero_utilities_ECS.tick = function(dt) {
 	if(dt == null) {
 		dt = 0;
@@ -1007,23 +903,19 @@ var zero_utilities_System = function(priority) {
 	}
 	this.priority = priority;
 };
-zero_utilities_System.__name__ = true;
 zero_utilities_System.prototype = {
 	update: function(dt,entities) {
 	}
 };
 var zero_utilities_EventBus = function() { };
-zero_utilities_EventBus.__name__ = true;
 zero_utilities_EventBus.dispatch = function(name,data) {
-	var key = Std.string(name);
 	var _this = zero_utilities_EventBus.listeners;
-	if(!(__map_reserved[key] != null ? _this.existsReserved(key) : _this.h.hasOwnProperty(key))) {
+	if(!(__map_reserved[name] != null ? _this.existsReserved(name) : _this.h.hasOwnProperty(name))) {
 		return;
 	}
 	var _g = 0;
-	var key1 = Std.string(name);
 	var _this1 = zero_utilities_EventBus.listeners;
-	var _g1 = __map_reserved[key1] != null ? _this1.getReserved(key1) : _this1.h[key1];
+	var _g1 = __map_reserved[name] != null ? _this1.getReserved(name) : _this1.h[name];
 	while(_g < _g1.length) {
 		var listener = _g1[_g];
 		++_g;
@@ -1033,30 +925,25 @@ zero_utilities_EventBus.dispatch = function(name,data) {
 	}
 };
 zero_utilities_EventBus.listen = function(listener,name) {
-	var key = Std.string(name);
 	var _this = zero_utilities_EventBus.listeners;
-	if(!(__map_reserved[key] != null ? _this.existsReserved(key) : _this.h.hasOwnProperty(key))) {
-		var key1 = Std.string(name);
+	if(!(__map_reserved[name] != null ? _this.existsReserved(name) : _this.h.hasOwnProperty(name))) {
 		var _this1 = zero_utilities_EventBus.listeners;
 		var value = [];
-		if(__map_reserved[key1] != null) {
-			_this1.setReserved(key1,value);
+		if(__map_reserved[name] != null) {
+			_this1.setReserved(name,value);
 		} else {
-			_this1.h[key1] = value;
+			_this1.h[name] = value;
 		}
 	}
-	var key2 = Std.string(name);
 	var _this2 = zero_utilities_EventBus.listeners;
-	(__map_reserved[key2] != null ? _this2.getReserved(key2) : _this2.h[key2]).push(listener);
+	(__map_reserved[name] != null ? _this2.getReserved(name) : _this2.h[name]).push(listener);
 };
 var zero_utilities_SyncedSin = function() { };
-zero_utilities_SyncedSin.__name__ = true;
 zero_utilities_SyncedSin.update = function(dt) {
 	zero_utilities_SyncedSin.counter = (zero_utilities_SyncedSin.counter + dt) % 1;
 };
 var zero_utilities_Timer = function() {
 };
-zero_utilities_Timer.__name__ = true;
 zero_utilities_Timer.get = function(time,fn,repeat) {
 	if(repeat == null) {
 		repeat = 1;
@@ -1106,13 +993,7 @@ var $_;
 function $bind(o,m) { if( m == null ) return null; if( m.__id__ == null ) m.__id__ = $global.$haxeUID++; var f; if( o.hx__closures__ == null ) o.hx__closures__ = {}; else f = o.hx__closures__[m.__id__]; if( f == null ) { f = m.bind(o); o.hx__closures__[m.__id__] = f; } return f; }
 $global.$haxeUID |= 0;
 var __map_reserved = {};
-String.__name__ = true;
-Array.__name__ = true;
 haxe_ds_ObjectMap.count = 0;
-Object.defineProperty(js__$Boot_HaxeError.prototype,"message",{ get : function() {
-	return String(this.val);
-}});
-js_Boot.__toStr = ({ }).toString;
 zero_utilities__$Color_Color_$Impl_$.WHITE = zero_utilities__$Color_Color_$Impl_$.from_array_int([1,1,1,1]);
 zero_utilities__$Color_Color_$Impl_$.BLACK = zero_utilities__$Color_Color_$Impl_$.from_array_int([0,0,0,1]);
 zero_utilities__$Color_Color_$Impl_$.PICO_8_WHITE = zero_utilities__$Color_Color_$Impl_$.from_array_float([1,0.945098039215686248,0.909803921568627438,1]);
