@@ -19,6 +19,7 @@ function precache() {
 			'pixi.js',
 			'tweenmax.js',
 			'easepack.js',
+			'manifest.json',
 		]);
 	});
 }
