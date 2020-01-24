@@ -5,7 +5,7 @@
   "display": "minimal-ui",
   "orientation": "portrait",
   "Scope": "/",
-  "start_url": "/",
+  "start_url": "index.html",
   "icons": [
     {
       "src": "images/icons/icon-72x72.png",
